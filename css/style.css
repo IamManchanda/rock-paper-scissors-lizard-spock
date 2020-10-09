@@ -4,12 +4,15 @@ html {
 
 body {
   margin: 0;
-  min-height: 100vh;
   background-color: whitesmoke;
   font-family: Lato, sans-serif;
+}
+
+.page-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
 
 .game-container {
@@ -18,6 +21,7 @@ body {
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
 }
 
 .header {
@@ -37,7 +41,8 @@ h1 {
 }
 
 .player-container,
-.computer-container {
+.computer-container,
+.help-container {
   margin: 50px;
 }
 
@@ -85,10 +90,22 @@ h2 {
   align-items: center;
 }
 
+.help-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
 .result-text {
   font-size: 40px;
   margin: unset;
   margin-top: 20px;
+}
+
+.help-text {
+  font-size: 25px;
+  margin: 25px inherit;
 }
 
 /* Media Query: Large Smartphone (Vertical) */
@@ -102,8 +119,13 @@ h2 {
     font-size: 24px;
   }
 
+  .help-text {
+    font-size: 20px;
+  }
+
   .player-container,
-  .computer-container {
+  .computer-container,
+  .help-container {
     margin: 50px 0 25px 25px;
   }
 
@@ -127,8 +149,13 @@ h2 {
     font-size: 22px;
   }
 
+  .help-text {
+    font-size: 18px;
+  }
+
   .player-container,
-  .computer-container {
+  .computer-container,
+  .help-container {
     margin: 43px 0 25px 20px;
   }
 

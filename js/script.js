@@ -14,7 +14,7 @@ const computerLizard = document.getElementById("computer-lizard");
 const computerSpock = document.getElementById("computer-spock");
 const resultText = document.getElementById("result-text");
 const reset = document.getElementById("reset");
-const allGameIcons = document.querySelector(".far");
+const allGameIcons = document.querySelectorAll(".far");
 
 const choices = {
   rock: {
@@ -38,3 +38,53 @@ const choices = {
     defeats: ["scissors", "rock"],
   },
 };
+
+function resetAllSelected() {
+  allGameIcons.forEach((icon) => {
+    icon.classList.remove("selected");
+  });
+}
+
+function handleSelected(playerChoice) {
+  resetAllSelected();
+  switch (playerChoice) {
+    case "rock":
+      playerRock.classList.add("selected");
+      playerChoiceEl.textContent = " --- Rock";
+      break;
+    case "paper":
+      playerPaper.classList.add("selected");
+      playerChoiceEl.textContent = " --- Paper";
+      break;
+    case "scissors":
+      playerScissors.classList.add("selected");
+      playerChoiceEl.textContent = " --- Scissors";
+      break;
+    case "lizard":
+      playerLizard.classList.add("selected");
+      playerChoiceEl.textContent = " --- Lizard";
+      break;
+    case "spock":
+      playerSpock.classList.add("selected");
+      playerChoiceEl.textContent = " --- Spock";
+      break;
+    default:
+      break;
+  }
+}
+
+playerRock.addEventListener("click", () => {
+  handleSelected("rock");
+});
+playerPaper.addEventListener("click", () => {
+  handleSelected("paper");
+});
+playerScissors.addEventListener("click", () => {
+  handleSelected("scissors");
+});
+playerLizard.addEventListener("click", () => {
+  handleSelected("lizard");
+});
+playerSpock.addEventListener("click", () => {
+  handleSelected("spock");
+});

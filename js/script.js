@@ -15,7 +15,10 @@ const computerSpock = document.getElementById("computer-spock");
 const resultText = document.getElementById("result-text");
 const reset = document.getElementById("reset");
 const allGameIcons = document.querySelectorAll(".far");
+const helpContent = document.getElementById("help-content");
 
+let playerScoreNumber = 0;
+let computerScoreNumber = 0;
 let computerChoice = "";
 
 const choices = {
@@ -40,6 +43,17 @@ const choices = {
     defeats: ["scissors", "rock"],
   },
 };
+
+for (const choiceKey in choices) {
+  if (choices.hasOwnProperty(choiceKey)) {
+    const choiceValue = choices[choiceKey];
+    const { name, defeats } = choiceValue;
+    const helpText = document.createElement("h3");
+    helpText.classList.add("help-text");
+    helpText.textContent = `A ${name} can defeat ${defeats[0]} and ${defeats[1]}.`;
+    helpContent.appendChild(helpText);
+  }
+}
 
 function resetAllSelected() {
   allGameIcons.forEach((icon) => {
@@ -89,14 +103,32 @@ function displayComputerChoice() {
   }
 }
 
-function checkResult() {
+function updateScore(playerChoice) {
+  if (playerChoice === computerChoice) {
+    resultText.textContent = "It's a Tie";
+  } else {
+    const choice = choices[playerChoice];
+    if (choice.defeats.includes(computerChoice)) {
+      resultText.textContent = "You Won!";
+      playerScoreNumber += 1;
+      playerScoreEl.textContent = playerScoreNumber;
+    } else {
+      resultText.textContent = "You Lost!";
+      computerScoreNumber += 1;
+      computerScoreEl.textContent = computerScoreNumber;
+    }
+  }
+}
+
+function checkResult(playerChoice) {
   resetAllSelected();
   handleComputerRandomChoice();
   displayComputerChoice();
+  updateScore(playerChoice);
 }
 
 function handleSelected(playerChoice) {
-  checkResult();
+  checkResult(playerChoice);
   switch (playerChoice) {
     case "rock":
       playerRock.classList.add("selected");

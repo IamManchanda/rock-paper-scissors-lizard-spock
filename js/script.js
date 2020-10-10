@@ -1,3 +1,5 @@
+import { startConfetti, stopConfetti, removeConfetti } from "./confetti.js";
+
 const playerScoreEl = document.getElementById("player-score");
 const playerChoiceEl = document.getElementById("player-choice");
 const playerRock = document.getElementById("player-rock");
@@ -44,11 +46,10 @@ let playerScoreNumber = 0;
 let computerScoreNumber = 0;
 let computerChoice = "";
 
-async function resetAllSelected() {
+function resetAllSelected() {
   allGameIcons.forEach((icon) => {
     icon.classList.remove("selected");
   });
-  const { stopConfetti, removeConfetti } = await import("./confetti.js");
   stopConfetti();
   removeConfetti();
 }
@@ -106,13 +107,12 @@ function displayComputerChoice() {
   }
 }
 
-async function updateScore(playerChoice) {
+function updateScore(playerChoice) {
   if (playerChoice === computerChoice) {
     resultText.textContent = "It's a Tie!";
   } else {
     const choice = choices[playerChoice];
     if (choice.defeats.includes(computerChoice)) {
-      const { startConfetti } = await import("./confetti.js");
       startConfetti();
       resultText.textContent = "You Won!";
       playerScoreNumber += 1;

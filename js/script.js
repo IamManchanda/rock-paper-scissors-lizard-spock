@@ -1,3 +1,5 @@
+import { startConfetti, stopConfetti, removeConfetti } from "./confetti.js";
+
 const playerScoreEl = document.getElementById("player-score");
 const playerChoiceEl = document.getElementById("player-choice");
 const playerRock = document.getElementById("player-rock");
@@ -16,10 +18,6 @@ const resultText = document.getElementById("result-text");
 const reset = document.getElementById("reset");
 const allGameIcons = document.querySelectorAll(".far");
 const helpContent = document.getElementById("help-content");
-
-let playerScoreNumber = 0;
-let computerScoreNumber = 0;
-let computerChoice = "";
 
 const choices = {
   rock: {
@@ -44,21 +42,16 @@ const choices = {
   },
 };
 
-for (const choiceKey in choices) {
-  if (choices.hasOwnProperty(choiceKey)) {
-    const choiceValue = choices[choiceKey];
-    const { name, defeats } = choiceValue;
-    const helpText = document.createElement("h3");
-    helpText.classList.add("help-text");
-    helpText.textContent = `A ${name} can defeat ${defeats[0]} and ${defeats[1]}.`;
-    helpContent.appendChild(helpText);
-  }
-}
+let playerScoreNumber = 0;
+let computerScoreNumber = 0;
+let computerChoice = "";
 
 function resetAllSelected() {
   allGameIcons.forEach((icon) => {
     icon.classList.remove("selected");
   });
+  stopConfetti();
+  removeConfetti();
 }
 
 function resetGame() {
@@ -120,6 +113,7 @@ function updateScore(playerChoice) {
   } else {
     const choice = choices[playerChoice];
     if (choice.defeats.includes(computerChoice)) {
+      startConfetti();
       resultText.textContent = "You Won!";
       playerScoreNumber += 1;
       playerScoreEl.textContent = playerScoreNumber;
@@ -189,5 +183,16 @@ reset.addEventListener("click", () => {
     reset.classList.remove("fa-spin");
   }, 1000);
 });
+
+for (const choiceKey in choices) {
+  if (choices.hasOwnProperty(choiceKey)) {
+    const choiceValue = choices[choiceKey];
+    const { name, defeats } = choiceValue;
+    const helpText = document.createElement("h3");
+    helpText.classList.add("help-text");
+    helpText.textContent = `A ${name} can defeat ${defeats[0]} and ${defeats[1]}.`;
+    helpContent.appendChild(helpText);
+  }
+}
 
 resetGame();

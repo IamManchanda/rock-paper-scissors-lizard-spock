@@ -86,10 +86,16 @@ h2 {
   margin-left: 50px;
 }
 
+.reset-text {
+  font-size: 25px;
+  margin-left: 10px;
+}
+
 .result-content {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
 }
 
 .help-content {
@@ -101,6 +107,7 @@ h2 {
 
 .result-text {
   font-size: 40px;
+  font-family: "Merienda", cursive;
   margin: unset;
   margin-top: 20px;
 }

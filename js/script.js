@@ -68,7 +68,7 @@ function resetGame() {
   computerScoreEl.textContent = computerScoreNumber;
   playerChoiceEl.textContent = "";
   computerChoiceEl.textContent = "";
-  resultText.textContent = "Let's Play!";
+  resultText.textContent = "";
   resetAllSelected();
 }
 
@@ -116,7 +116,7 @@ function displayComputerChoice() {
 
 function updateScore(playerChoice) {
   if (playerChoice === computerChoice) {
-    resultText.textContent = "It's a Tie";
+    resultText.textContent = "It's a Tie!";
   } else {
     const choice = choices[playerChoice];
     if (choice.defeats.includes(computerChoice)) {

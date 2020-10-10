@@ -61,6 +61,17 @@ function resetAllSelected() {
   });
 }
 
+function resetGame() {
+  playerScoreNumber = 0;
+  computerScoreNumber = 0;
+  playerScoreEl.textContent = playerScoreNumber;
+  computerScoreEl.textContent = computerScoreNumber;
+  playerChoiceEl.textContent = "";
+  computerChoiceEl.textContent = "";
+  resultText.textContent = "Let's Play!";
+  resetAllSelected();
+}
+
 function handleComputerRandomChoice() {
   const computerChoiceNumber = Math.random();
   if (computerChoiceNumber <= 0.2) {
@@ -170,3 +181,13 @@ playerLizard.addEventListener("click", () => {
 playerSpock.addEventListener("click", () => {
   handleSelected("spock");
 });
+
+reset.addEventListener("click", () => {
+  reset.classList.add("fa-spin");
+  setTimeout(() => {
+    resetGame();
+    reset.classList.remove("fa-spin");
+  }, 1000);
+});
+
+resetGame();
